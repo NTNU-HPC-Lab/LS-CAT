@@ -1,0 +1,3 @@
+#define MERGE_THREADBLOCK_SIZE 128
+#define HISTOGRAM64_BIN_COUNT 64
+//new series 

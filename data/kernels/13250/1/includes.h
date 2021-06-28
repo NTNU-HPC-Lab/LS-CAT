@@ -1,0 +1,3 @@
+#define MERGE_THREADBLOCK_SIZE 256
+#define HISTO256_BINS 256
+//new series 

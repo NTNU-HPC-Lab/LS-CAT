@@ -1,0 +1,6 @@
+#define   ROWS_GRAD_BLOCKDIM_X 16
+#define   ROWS_GRAD_BLOCKDIM_Y 4
+#define ROWS_GRAD_BLOCKDIM_Z 4
+#define ROWS_GRAD_RESULT_STEPS 8
+#define   ROWS_GRAD_HALO_STEPS 1
+//new series 

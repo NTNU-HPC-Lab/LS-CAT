@@ -1,0 +1,23 @@
+#include "includes.h"
+extern "C" {
+
+#ifndef NUMBER
+#define NUMBER float
+#endif
+
+
+
+
+
+}
+__global__ void vector_swap (const int n, NUMBER* x, const int offset_x, const int stride_x, NUMBER* y, const int offset_y, const int stride_y) {
+
+const int gid = blockIdx.x * blockDim.x + threadIdx.x;
+if (gid < n) {
+const int ix = offset_x + gid * stride_x;
+const int iy = offset_y + gid * stride_y;
+const NUMBER val = y[ix];
+y[iy] = x[ix];
+x[ix] = val;
+}
+}

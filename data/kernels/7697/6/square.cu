@@ -1,0 +1,7 @@
+#include "includes.h"
+__global__ void square(float *d_out, float *d_in){
+int idx = threadIdx.x;
+printf("id %d\n", idx);
+float f = d_in[idx];
+d_out[idx] = f * f;
+}

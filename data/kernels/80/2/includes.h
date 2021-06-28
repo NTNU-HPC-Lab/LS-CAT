@@ -1,0 +1,5 @@
+#define	DEPTH_BLOCKDIM_X 8
+#define	DEPTH_BLOCKDIM_Z 32
+#define	DEPTH_RESULT_STEPS 8
+#define	DEPTH_HALO_STEPS 1
+//new series 

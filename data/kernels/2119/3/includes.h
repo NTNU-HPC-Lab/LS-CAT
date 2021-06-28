@@ -1,0 +1,3 @@
+#define BLOCKDIM_X 24
+#define BLOCKDIM_Y 24
+//new series 

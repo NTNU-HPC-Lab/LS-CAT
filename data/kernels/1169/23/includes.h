@@ -1,0 +1,6 @@
+#define   ER_COLUMNS_BLOCKDIM_X 4
+#define   ER_COLUMNS_BLOCKDIM_Y 16
+#define   ER_COLUMNS_BLOCKDIM_Z 4
+#define   ER_COLUMNS_RESULT_STEPS 9
+#define   ER_COLUMNS_HALO_STEPS 1
+//new series 

@@ -1,0 +1,6 @@
+#define   ER_LAYERS_BLOCKDIM_X 8
+#define   ER_LAYERS_BLOCKDIM_Y 8
+#define ER_LAYERS_BLOCKDIM_Z 4
+#define ER_LAYERS_RESULT_STEPS 2
+#define   ER_LAYERS_HALO_STEPS 2
+//new series 

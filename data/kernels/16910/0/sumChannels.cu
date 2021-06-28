@@ -1,0 +1,50 @@
+#include "includes.h"
+const int  Nthreads = 1024, maxFR = 5000, NrankMax = 6;
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+__global__ void  sumChannels(const double *Params, const float *data, float *datasum, int *kkmax, const int *iC){
+
+int tid, tid0,t, kmax, i, bid, NT, Nchan, NchanNear,j,iChan, Nsum, Nrank;
+float  Cf, Cmax;
+
+NchanNear = (int) Params[10];
+tid 		= threadIdx.x;
+bid 		= blockIdx.x;
+NT 		= (int) Params[0];
+Nchan     = (int) Params[9];
+Nsum      = (int) Params[13];
+Nrank     = (int) Params[14];
+
+tid0 = tid + bid * blockDim.x;
+while (tid0<NT){
+for (i=0; i<Nchan;i++){
+Cmax = 0.0f;
+kmax = 0;
+for (t=0;t<Nrank;t++){
+Cf = 0.0f;
+for(j=0; j<Nsum; j++){
+iChan = iC[j+ NchanNear * i];
+Cf    += data[tid0 + NT * iChan + t * NT * Nchan];
+if (Cf*Cf/(1+j) > Cmax){
+Cmax = Cf*Cf /(1+j);
+kmax = j + t*Nsum;
+}
+}
+}
+datasum[tid0 + NT * i] = Cmax;
+kkmax[tid0 + NT * i]   = kmax;
+}
+tid0 += blockDim.x * gridDim.x;
+}
+}

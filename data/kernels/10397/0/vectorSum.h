@@ -1,0 +1,1 @@
+float* myCudaTest(int *n);

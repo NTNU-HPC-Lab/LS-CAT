@@ -1,0 +1,2 @@
+#include "includes.h"
+__global__ void BFS_kernel_multi_block( volatile unsigned int *frontier, volatile unsigned int *frontier2, unsigned int frontier_len, volatile unsigned int *cost, volatile int *visited, unsigned int *edgeArray, unsigned int *edgeArrayAux, unsigned int numVertices, unsigned int numEdges, volatile unsigned int *frontier_length, unsigned int NUM_P_PER_MP, unsigned int W_Q_SIZE) { ; }
