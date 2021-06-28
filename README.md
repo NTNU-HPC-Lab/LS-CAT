@@ -20,8 +20,11 @@ The results archive currently contains our T4 results compiled using the default
 # LS-CAT Dataset stats
 20 259 kernels
 
-Up to 7 matrix sizes. Square matricies with dimensions: 240, 496, 784, 1016, 1232, 1680, 2024
-20 block sizes: {{8,8},{16,16},{24,24},{32,32},{1,64},{1,128},{1,192},{1,256},{1,320},{1,384},{1,448},{1,512},{1,576},{1,640},{1,704},{1,768},{1,832},{1,896},{1,960},{1,1024}}
+### Up to 7 matrix sizes 
+Square matricies with dimensions: 240, 496, 784, 1016, 1232, 1680, 2024
+
+### 20 block sizes 
+{8,8},{16,16},{24,24},{32,32},{1,64},{1,128},{1,192},{1,256},{1,320},{1,384},{1,448},{1,512},{1,576},{1,640},{1,704},{1,768},{1,832},{1,896},{1,960},{1,1024}
 
 2 836 260 data points (including any N/A results)
 N/A results are dropped at the end of the measurement process.
