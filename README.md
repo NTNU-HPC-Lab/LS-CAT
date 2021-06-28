@@ -2,9 +2,9 @@
 Run the runner.sh script in an environment with pandas and numpy,
 e.g. in a nvidia-docker container:
 
-nvidia-docker run -it --rm -v $(pwd):/workspace nvcr.io/nvidia/pytorch:21.06-py3
+`nvidia-docker run -it --rm -v $(pwd):/workspace nvcr.io/nvidia/pytorch:21.06-py3`
 
-The runner.sh script contains three arguments for our python runner.
+The runner.sh script contains four arguments for our python runner.
 1. The device ID of the GPU to use for the runs
 2. Timeout threshold in seconds for kernels (will terminate the kernel if this is exceeded) 
 3. The maximum matrix size. Decrease this if you run out of memory on your GPU.
