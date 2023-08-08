@@ -44,8 +44,8 @@ def find_value(in_var:str):
     height_e=["h","cols","n_b"]
     irrelevant_c=["pitch","batch","stride","spatial","filter","scale","alpha","beta"]
     irrelevant_e=["a","b","c","d3","d2","d1","m","dim","seed","value","offset","pad"]
-    
-    
+
+
     if find_value_for_list(in_var,width_c,False):
         return "XSIZE"
     elif find_value_for_list(in_var,width_e,True):
@@ -83,7 +83,7 @@ def edit_values(path:str,device_id):
         a_file.close()
     for c in range(len(out)):
 
-        
+
         if out[c].find("=")!=-1 and  out[c].find("for")==-1 and  out[c].find("while")==-1 and  out[c].find("auto")==-1 and out[c].find("blocks_")==-1 and out[c].find("matrices_")==-1:
             if out[c].split("=")[0].find("*")==-1:
                 left=out[c].split("=")[0]
@@ -104,7 +104,7 @@ def run_file(path:str, function, run_times, device_id, flags, timeout, matrix_le
     proc = subprocess.Popen([compile_cmd], stderr=subprocess.PIPE, shell=True,universal_newlines=True)
     (out, err) = proc.communicate()
     try:
-            
+
             run_cmd = "timeout " + timeout + " " + bin_path + str(device_id) + ".out" + " "+str(matrix_len)
             #print(run_cmd)
             proc = subprocess.Popen([run_cmd], stdout=subprocess.PIPE, shell=True,universal_newlines=True)
@@ -112,13 +112,14 @@ def run_file(path:str, function, run_times, device_id, flags, timeout, matrix_le
             results = out.split("\n")[:-1]
             for r in results:
                 res = ast.literal_eval(r)
-                run_times=run_times.append({'path':path,'function':function , 'time' : res[0], 'blocks': res[1], 'matrix':res[2]} , ignore_index=True)
+                new_row = pd.DataFrame([{'path': path, 'function': function, 'time': res[0], 'blocks': res[1], 'matrix':res[2]}])
+                run_times = pd.concat([run_times, new_row], ignore_index=True)
     except KeyboardInterrupt:
         print("\nQuitting ...")
         sys.exit(0)
     except:
-            run_times=run_times.append({'path':path,'function':function , 'time' : -1} , ignore_index=True)
-        
+            new_row = pd.DataFrame([{'path': path, 'function': function, 'time': -1}])
+            run_times = pd.concat([run_times, new_row], ignore_index=True)
     return run_times
 
 def add_variables(df,variables,function):
@@ -147,7 +148,7 @@ def main():
     runs = pd.read_csv(data_path+'kernel_list.csv')
     runtimes_path = results_path+"runtimes_temp_"+str(device_id)+".csv"
     run_times = pd.DataFrame(columns=['path',"function","time",'blocks','matrix'])#,'blocksizex',"blocksizey"])
-    if path.exists(runtimes_path): 
+    if path.exists(runtimes_path):
         run_times = pd.read_csv(runtimes_path,low_memory=False)
 
     counter=0
@@ -163,7 +164,7 @@ def main():
             compute_time=time.time()
             run_times=run_file(mainfile,row["function"],run_times,device_id,flags,timeout,matrix_len)
             run_times.to_csv(results_path+"runtimes_temp"+str(device_id)+".csv",index=False)
-            
+
         counter+=1
         time_left = ((time.time()-total_compute_time) / counter)*(len(runs)-counter)
         print(" "*prev_output_str_len, end="\r")
